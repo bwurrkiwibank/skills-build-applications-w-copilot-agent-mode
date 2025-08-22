@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 const API_URL = `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev/api/leaderboard/`;
 
+
 function Leaderboard() {
   const [leaderboard, setLeaderboard] = useState([]);
 
@@ -17,13 +18,26 @@ function Leaderboard() {
   }, []);
 
   return (
-    <div>
-      <h2>Leaderboard</h2>
-      <ul>
-        {leaderboard.map(l => (
-          <li key={l.leaderboard_id}>{l.team_id}: {l.points} pts</li>
-        ))}
-      </ul>
+    <div className="card">
+      <div className="card-body">
+        <h2 className="card-title mb-3">Leaderboard</h2>
+        <table className="table table-striped">
+          <thead>
+            <tr>
+              <th>Team</th>
+              <th>Points</th>
+            </tr>
+          </thead>
+          <tbody>
+            {leaderboard.map(l => (
+              <tr key={l.leaderboard_id}>
+                <td>{l.team_id}</td>
+                <td>{l.points}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
